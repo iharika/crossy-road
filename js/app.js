@@ -41,14 +41,31 @@ Player.prototype.update = function(dt) {
 
 Player.prototype.render = function() {
   //   console.log(" Player render function called");
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  for (row = 0; row < 6; row++) {
+    for (col = 0; col < 5; col++) {
+        if(row == 5 && col == 2){
+            ctx.drawImage(Resources.get(this.sprite), col * 101, row * 83);
+        }
+    }
+  }
+  
 };
 Player.prototype.handleInput = function(keyPressed) {
   //   console.log("handleInput called");
 
-  
-  this.x = this.x + 20;
-  this.y = this.y + 20;
+  switch (keyPressed) {
+    case "up":
+      this.y = this.y - 50;
+      break;
+    case "down":
+      this.y = this.y + 50;
+      break;
+    case "left":
+      this.x = this.x - 30;
+      break;
+    case "right":
+      this.x = this.x + 30;
+  }
 };
 
 // Now instantiate your objects.
