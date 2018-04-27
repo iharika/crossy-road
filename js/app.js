@@ -1,44 +1,37 @@
-const yCoordinates = [53,136,219];
-const myArray = [10,100,600 ];
-
+const yCoordinates = [53, 136, 219];
+const myArray = [1, 5, 10, 500];
 
 // Enemies our player must avoid
-var Enemy = function () {
-  // Variables applied to each of our instances go here,
-  // we've provided one for you to get started
-
-  // The image/sprite for our enemies, this uses
-  // a helper we've provided to easily load images
+var Enemy = function() {
 
   this.sprite = "images/enemy-bug.png";
   this.x = 0;
-  this.y = yCoordinates[Math.floor(Math.random()*yCoordinates.length)];
+  this.y = yCoordinates[Math.floor(Math.random() * yCoordinates.length)];
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function (dt) {
+Enemy.prototype.update = function(dt) {
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
-  let randomNum = myArray[Math.floor(Math.random()*myArray.length)];
+  // let randomNum = myArray[Math.floor(Math.random()*myArray.length)];
   if (this.x < 404) {
-this.x = this.x + (randomNum * dt); }
-else {
-  this.x = 0;
-}
-
+    this.x = this.x + myArray[Math.floor(Math.random() * myArray.length)] * dt;
+  } else {
+    this.x = 0;
+    this.y = yCoordinates[Math.floor(Math.random() * yCoordinates.length)];
+  }
 };
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function () {
-  // console.log("ENEMY render function called");
+Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Now write your own player class
 
-var Player = function () {
+var Player = function() {
   this.sprite = "images/char-pink-girl.png";
   this.x = 202;
   this.y = 385;
@@ -46,30 +39,20 @@ var Player = function () {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-Player.prototype.update = function (dt) {
-  //   console.log("Player update function called");
+Player.prototype.update = function(dt) {
+  checkForCollisions();
 };
 
-Player.prototype.render = function () {
-    // console.log(" Player render function called");
-  // for (row = 0; row < 6; row++) {
-  //   for (col = 0; col < 5; col++) {
-  //       if(row == 5 && col == 2){
-  //           ctx.drawImage(Resources.get(this.sprite), col * 101, row * 83);
-  //       }
-  //   }
-  // }
+Player.prototype.render = function() {
+
 
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-
 };
-Player.prototype.handleInput = function (keyPressed) {
-  //   console.log("handleInput called");
+Player.prototype.handleInput = function(keyPressed) {
 
   switch (keyPressed) {
     case "up":
       if (this.y > -30) {
-
         this.y = this.y - 83;
       }
       break;
@@ -96,14 +79,10 @@ const enemy1 = new Enemy();
 const enemy2 = new Enemy();
 const enemy3 = new Enemy();
 const enemy4 = new Enemy();
-const enemy5 = new Enemy();
-const enemy6 = new Enemy();
-
-
 
 // Place all enemy objects in an array called allEnemies
 
-const allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
+const allEnemies = [enemy1, enemy2, enemy3, enemy4];
 
 // Place the player object in a variable called player
 
@@ -111,7 +90,7 @@ const player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener("keyup", function (e) {
+document.addEventListener("keyup", function(e) {
   var allowedKeys = {
     37: "left",
     38: "up",
@@ -121,3 +100,17 @@ document.addEventListener("keyup", function (e) {
 
   player.handleInput(allowedKeys[e.keyCode]);
 });
+
+function checkForCollisions() {
+  allEnemies.forEach(function(enemy) {
+    if (
+      enemy.x > player.x - 85 &&
+      enemy.x < player.x + 85 &&
+      enemy.y === player.y
+    ) {
+      player.x = 202;
+      player.y = 385;
+      console.log("checkForCollisions  called.");
+    }
+  });
+}
