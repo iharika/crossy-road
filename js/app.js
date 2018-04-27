@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function () {
   // Variables applied to each of our instances go here,
   // we've provided one for you to get started
 
@@ -12,7 +12,7 @@ var Enemy = function() {
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+Enemy.prototype.update = function (dt) {
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
@@ -20,51 +20,63 @@ Enemy.prototype.update = function(dt) {
 };
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+Enemy.prototype.render = function () {
   //   console.log("render function called");
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Now write your own player class
 
-var Player = function() {
+var Player = function () {
   this.sprite = "images/char-pink-girl.png";
-  this.x = 50;
-  this.y = 75;
+  this.x = 202;
+  this.y = 385;
 };
 // This class requires an update(), render() and
 // a handleInput() method.
 
-Player.prototype.update = function(dt) {
+Player.prototype.update = function (dt) {
   //   console.log("Player update function called");
 };
 
-Player.prototype.render = function() {
-  //   console.log(" Player render function called");
-  for (row = 0; row < 6; row++) {
-    for (col = 0; col < 5; col++) {
-        if(row == 5 && col == 2){
-            ctx.drawImage(Resources.get(this.sprite), col * 101, row * 83);
-        }
-    }
-  }
-  
+Player.prototype.render = function () {
+  console.log(" Player render function called");
+  // for (row = 0; row < 6; row++) {
+  //   for (col = 0; col < 5; col++) {
+  //       if(row == 5 && col == 2){
+  //           ctx.drawImage(Resources.get(this.sprite), col * 101, row * 83);
+  //       }
+  //   }
+  // }
+
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
 };
-Player.prototype.handleInput = function(keyPressed) {
+Player.prototype.handleInput = function (keyPressed) {
   //   console.log("handleInput called");
 
   switch (keyPressed) {
     case "up":
-      this.y = this.y - 50;
+      if (this.y > -30) {
+
+        this.y = this.y - 83;
+      }
       break;
     case "down":
-      this.y = this.y + 50;
+      if (this.y < 385) {
+        this.y = this.y + 83;
+      }
       break;
     case "left":
-      this.x = this.x - 30;
+      if (this.x > 0) {
+        this.x = this.x - 101;
+      }
       break;
+
     case "right":
-      this.x = this.x + 30;
+      if (this.x < 404) {
+        this.x = this.x + 101;
+      }
   }
 };
 
@@ -83,7 +95,7 @@ const player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener("keyup", function(e) {
+document.addEventListener("keyup", function (e) {
   var allowedKeys = {
     37: "left",
     38: "up",
