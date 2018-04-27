@@ -1,3 +1,7 @@
+const yCoordinates = [53,136,219];
+const myArray = [10,100,600 ];
+
+
 // Enemies our player must avoid
 var Enemy = function () {
   // Variables applied to each of our instances go here,
@@ -5,9 +9,10 @@ var Enemy = function () {
 
   // The image/sprite for our enemies, this uses
   // a helper we've provided to easily load images
+
   this.sprite = "images/enemy-bug.png";
-  this.x = 30;
-  this.y = 30;
+  this.x = 0;
+  this.y = yCoordinates[Math.floor(Math.random()*yCoordinates.length)];
 };
 
 // Update the enemy's position, required method for game
@@ -16,12 +21,18 @@ Enemy.prototype.update = function (dt) {
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
-  //   console.log("update function called");
+  let randomNum = myArray[Math.floor(Math.random()*myArray.length)];
+  if (this.x < 404) {
+this.x = this.x + (randomNum * dt); }
+else {
+  this.x = 0;
+}
+
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function () {
-  //   console.log("render function called");
+  // console.log("ENEMY render function called");
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -40,7 +51,7 @@ Player.prototype.update = function (dt) {
 };
 
 Player.prototype.render = function () {
-  console.log(" Player render function called");
+    // console.log(" Player render function called");
   // for (row = 0; row < 6; row++) {
   //   for (col = 0; col < 5; col++) {
   //       if(row == 5 && col == 2){
@@ -84,10 +95,15 @@ Player.prototype.handleInput = function (keyPressed) {
 const enemy1 = new Enemy();
 const enemy2 = new Enemy();
 const enemy3 = new Enemy();
+const enemy4 = new Enemy();
+const enemy5 = new Enemy();
+const enemy6 = new Enemy();
+
+
 
 // Place all enemy objects in an array called allEnemies
 
-const allEnemies = [enemy1, enemy2, enemy3];
+const allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
 
 // Place the player object in a variable called player
 
