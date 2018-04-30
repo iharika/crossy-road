@@ -32,41 +32,46 @@ var Engine = (function(global) {
      * and handles properly calling the update and render methods.
      */
   function main() {
-  
-    /* Get our time delta information which is required if your game
+    if (player.y === -30) {
+      var now = Date.now(),
+        dt = (now - lastTime) / 1000.0;
+      update(dt);
+      render();
+      lastTime = now;
+
+      setTimeout(function() {
+
+        let modal = document.getElementById("myModal");
+        modal.style.display = "block";
+
+        return;
+      }, 500);
+    } else {
+      /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
          * instructions at different speeds we need a constant value that
          * would be the same for everyone (regardless of how fast their
          * computer is) - hurray time!
          */
-    var now = Date.now(),
-      dt = (now - lastTime) / 1000.0;
+      var now = Date.now(),
+        dt = (now - lastTime) / 1000.0;
 
-    /* Call our update/render functions, pass along the time delta to
+      /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
-    update(dt);
-    render();
+      update(dt);
+      render();
 
-    /* Set our lastTime variable which is used to determine the time delta
+      /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
          */
-    lastTime = now;
+      lastTime = now;
 
-    /* Use the browser's requestAnimationFrame function to call this
+      /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-    win.requestAnimationFrame(main);
-
-    if (player.y === -30) {
-        setTimeout(function() {
-          player.x = 202;
-          player.y = 385;
-          alert("you win");
-        }, 3000);
-        
-      }
-         
+      win.requestAnimationFrame(main);
+    }
   }
 
   /* This function does some initial setup that should only occur once,
@@ -78,25 +83,21 @@ var Engine = (function(global) {
     let modal = document.getElementById("myModal");
 
     // Get the button that opens the modal
-    const btn = document.getElementById("myBtn");
 
     // Get the <span> element that closes the modal
     const span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks the button, open the modal
-    btn.addEventListener("click", function() {
-      modal.style.display = "block";
-    });
-
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
       modal.style.display = "none";
+      location.reload();
     };
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";
+        location.reload();
       }
     };
 

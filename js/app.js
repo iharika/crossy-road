@@ -40,7 +40,6 @@ var Player = function() {
 
 Player.prototype.update = function(dt) {
   checkForCollisions();
-  
 };
 
 Player.prototype.render = function() {
