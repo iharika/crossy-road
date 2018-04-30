@@ -1,9 +1,8 @@
 const yCoordinates = [53, 136, 219];
-const myArray = [1, 5, 10, 500];
+const myArray = [1, 100, 500];
 
 // Enemies our player must avoid
 var Enemy = function() {
-
   this.sprite = "images/enemy-bug.png";
   this.x = 0;
   this.y = yCoordinates[Math.floor(Math.random() * yCoordinates.length)];
@@ -15,11 +14,11 @@ Enemy.prototype.update = function(dt) {
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
-  // let randomNum = myArray[Math.floor(Math.random()*myArray.length)];
-  if (this.x < 404) {
-    this.x = this.x + myArray[Math.floor(Math.random() * myArray.length)] * dt;
+  if (this.x < 494) {
+    this.x =
+      this.x + 1 + myArray[Math.floor(Math.random() * myArray.length)] * dt;
   } else {
-    this.x = 0;
+    this.x = -80;
     this.y = yCoordinates[Math.floor(Math.random() * yCoordinates.length)];
   }
 };
@@ -41,15 +40,13 @@ var Player = function() {
 
 Player.prototype.update = function(dt) {
   checkForCollisions();
+  
 };
 
 Player.prototype.render = function() {
-
-
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 Player.prototype.handleInput = function(keyPressed) {
-
   switch (keyPressed) {
     case "up":
       if (this.y > -30) {
@@ -75,14 +72,15 @@ Player.prototype.handleInput = function(keyPressed) {
 };
 
 // Now instantiate your objects.
-const enemy1 = new Enemy();
-const enemy2 = new Enemy();
-const enemy3 = new Enemy();
-const enemy4 = new Enemy();
+
+const allEnemies = [];
+const initiateEnemies = () => {
+  for (i = 0; i < 5; i++) {
+    allEnemies.push(new Enemy());
+  }
+};
 
 // Place all enemy objects in an array called allEnemies
-
-const allEnemies = [enemy1, enemy2, enemy3, enemy4];
 
 // Place the player object in a variable called player
 
@@ -114,3 +112,5 @@ function checkForCollisions() {
     }
   });
 }
+
+initiateEnemies();
