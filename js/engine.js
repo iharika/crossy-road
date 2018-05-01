@@ -27,7 +27,8 @@ var Engine = (function(global) {
   canvas.width = 505;
   canvas.height = 606;
   // doc.body.appendChild(canvas);
-  document.querySelector("#game-canvas").appendChild(canvas);
+  $(canvas).insertBefore(document.querySelector('#reloadButton'));
+
 
   /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -77,7 +78,7 @@ var Engine = (function(global) {
      * game loop.
      */
   function init() {
-    
+
     document
       .querySelector("#playAgainButton")
       .addEventListener("click", function() {
@@ -193,7 +194,10 @@ var Engine = (function(global) {
     "images/grass-block.png",
     "images/enemy-bug.png",
     "images/char-boy.png",
-    "images/char-pink-girl.png"
+    "images/char-pink-girl.png",
+    "images/char-princess-girl.png",
+    "images/char-cat-girl.png"
+
   ]);
   Resources.onReady(init);
 
@@ -203,3 +207,23 @@ var Engine = (function(global) {
      */
   global.ctx = ctx;
 })(this);
+
+$(document).ready(function () {
+  $('#startGameModal').modal();
+  chooseCharacter();
+
+});
+
+function chooseCharacter() {
+  document.getElementById("characterImages").addEventListener("click", function(e) {
+    // e.target is the clicked element!
+    // If it was a list item
+    document.querySelectorAll(".selectedCharacter").forEach(function(e) {e.setAttribute("style", "background-color: none;")});
+      console.log( e.target.id +  "  was clicked!");
+      player.sprite = e.target.id;
+      // e.target.setAttribute("style", "background-color: red;");
+      
+      e.target.setAttribute("style", "border-bottom: 3px solid red;");
+
+  });
+}
