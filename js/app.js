@@ -3,7 +3,7 @@ const myArray = [1, 100, 500];
 
 // Enemies our player must avoid
 var Enemy = function() {
-  this.sprite = "images/enemy-bug.png";
+  this.sprite = 'images/enemy-bug.png';
   this.x = 0;
   this.y = yCoordinates[Math.floor(Math.random() * yCoordinates.length)];
 };
@@ -31,7 +31,7 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 
 var Player = function() {
-  this.sprite = "images/char-pink-girl.png";
+  this.sprite = 'images/char-pink-girl.png';
   this.x = 202;
   this.y = 385;
 };
@@ -47,23 +47,23 @@ Player.prototype.render = function() {
 };
 Player.prototype.handleInput = function(keyPressed) {
   switch (keyPressed) {
-    case "up":
+    case 'up':
       if (this.y > -30) {
         this.y = this.y - 83;
       }
       break;
-    case "down":
+    case 'down':
       if (this.y < 385) {
         this.y = this.y + 83;
       }
       break;
-    case "left":
+    case 'left':
       if (this.x > 0) {
         this.x = this.x - 101;
       }
       break;
 
-    case "right":
+    case 'right':
       if (this.x < 404) {
         this.x = this.x + 101;
       }
@@ -87,12 +87,12 @@ const player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener("keyup", function(e) {
+document.addEventListener('keyup', function(e) {
   var allowedKeys = {
-    37: "left",
-    38: "up",
-    39: "right",
-    40: "down"
+    37: 'left',
+    38: 'up',
+    39: 'right',
+    40: 'down'
   };
 
   player.handleInput(allowedKeys[e.keyCode]);
@@ -107,7 +107,7 @@ function checkForCollisions() {
     ) {
       player.x = 202;
       player.y = 385;
-      console.log("checkForCollisions  called.");
+      console.log('checkForCollisions  called.');
     }
   });
 }
