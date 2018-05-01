@@ -26,7 +26,8 @@ var Engine = (function(global) {
 
   canvas.width = 505;
   canvas.height = 606;
-  doc.body.appendChild(canvas);
+  // doc.body.appendChild(canvas);
+  document.querySelector("#game-canvas").appendChild(canvas);
 
   /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -40,10 +41,7 @@ var Engine = (function(global) {
       lastTime = now;
 
       setTimeout(function() {
-
-        let modal = document.getElementById("myModal");
-        modal.style.display = "block";
-
+        $("#congratsModalCenter").modal("show");
         return;
       }, 500);
     } else {
@@ -79,28 +77,12 @@ var Engine = (function(global) {
      * game loop.
      */
   function init() {
-    // Get the modal
-    let modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-
-    // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
-      location.reload();
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
+    
+    document
+      .querySelector("#playAgainButton")
+      .addEventListener("click", function() {
         location.reload();
-      }
-    };
-
+      });
     reset();
     lastTime = Date.now();
     main();
