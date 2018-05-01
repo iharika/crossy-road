@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Effective JavaScript: Frogger</title>
+  <title>Crossy Road</title>
   <link rel="stylesheet" href="css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -14,18 +14,19 @@
 
   <div class="modal fade" id="congratsModalCenter" tabindex="-1" role="dialog" aria-labelledby="congratsModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content text-center">
         <div class="modal-header">
-          <h5 class="modal-title" id="congratsModalCenterLongTitle">Congratulations</h5>
+          <h3 class="col-12 modal-title text-center" id="congratsModalCenterLongTitle">Congratulations</h3>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          You did it !!
+        <div class="modal-body text-center">
+          <img src=images/Star.png alt="star logo">
+         <p>You did it !!</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="playAgainButton">Play Again</button>
+          <button type="button" class="btn btn-primary mx-auto" id="playAgainButton">Play Again</button>
         </div>
       </div>
     </div>
@@ -37,7 +38,7 @@
       <div class="col-sm">
       </div>
       <div class="col-sm text-center" id="game-canvas">
-          <button type="button" class="btn btn-primary" id="reloadButton">Re-Start game</button>
+          <button type="button" class="btn btn-primary" id="reloadButton">Restart Game</button>
       </div>
 
       <div class="col-sm">
@@ -49,10 +50,10 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header text-center">
-          <h4 class="modal-title">Welcome to Crossy Road</h4>
+          <h4 class="col-12 modal-title text-center">Welcome to Crossy Road</h4>
         </div>
-        <div class="modal-body">
-          Choose your character from below:
+        <div class="modal-body text-center">
+          Choose your character
           <div id="characterImages">
           
           <img id="images/char-boy.png" class="selectedCharacter" src="images/char-boy.png">
@@ -63,7 +64,7 @@
         </div>
           </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary btnStartGame" data-dismiss="modal">Start Playing</button>
+          <button type="button" class="mx-auto btn btn-primary btnStartGame" data-dismiss="modal">Start Playing</button>
         </div>
       </div>
     </div>

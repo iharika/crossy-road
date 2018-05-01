@@ -84,6 +84,15 @@ var Engine = (function(global) {
       .addEventListener("click", function() {
         location.reload();
       });
+
+      
+
+    document
+      .querySelector("#reloadButton")
+      .addEventListener("click", function() {
+        location.reload();
+      });  
+      
     reset();
     lastTime = Date.now();
     main();

@@ -3,10 +3,16 @@ body {
 }
 body {font-family: Arial, Helvetica, sans-serif;}
 
-.modal {
+/* .modal {
     text-align: center;
-}
+} */
 
 .selectedCharacter:hover {
     cursor: pointer;
+    transform: scale(1.1);
+
+}
+
+.modal-body {
+    font-size: 18px;
 }
