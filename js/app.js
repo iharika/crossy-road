@@ -1,5 +1,6 @@
 const yCoordinates = [53, 136, 219];
-const myArray = [1, 100, 500];
+const speedArray = [1, 100, 500];
+const randomNums = [1, 2.5, 5];
 
 // Enemies our player must avoid
 var Enemy = function() {
@@ -16,7 +17,9 @@ Enemy.prototype.update = function(dt) {
   // all computers.
   if (this.x < 494) {
     this.x =
-      this.x + 1 + myArray[Math.floor(Math.random() * myArray.length)] * dt;
+      this.x +
+      randomNums[Math.floor(Math.random() * randomNums.length)] +
+      speedArray[Math.floor(Math.random() * speedArray.length)] * dt;
   } else {
     this.x = -80;
     this.y = yCoordinates[Math.floor(Math.random() * yCoordinates.length)];
@@ -101,13 +104,12 @@ document.addEventListener('keyup', function(e) {
 function checkForCollisions() {
   allEnemies.forEach(function(enemy) {
     if (
-      enemy.x > player.x - 85 &&
-      enemy.x < player.x + 85 &&
+      enemy.x > player.x - 50 &&
+      enemy.x < player.x + 50 &&
       enemy.y === player.y
     ) {
       player.x = 202;
       player.y = 385;
-      console.log('checkForCollisions  called.');
     }
   });
 }
