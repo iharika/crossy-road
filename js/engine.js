@@ -26,7 +26,6 @@ var Engine = (function(global) {
 
   canvas.width = 505;
   canvas.height = 606;
-  // doc.body.appendChild(canvas);
   $(canvas).insertBefore(document.querySelector('#reloadButton'));
 
   /* This function serves as the kickoff point for the game loop itself
@@ -105,7 +104,6 @@ var Engine = (function(global) {
      */
   function update(dt) {
     updateEntities(dt);
-    // checkCollisions();
   }
 
   /* This is called by the update function and loops through all of the
@@ -212,24 +210,23 @@ var Engine = (function(global) {
   global.ctx = ctx;
 })(this);
 
-$(document).ready(function() {
-  $('#startGameModal').modal();
-  chooseCharacter();
-});
-
+/* This function lets the user select a character he wants to play with from the initial modal window
+User can click on the character to select that specific character */
 function chooseCharacter() {
   document
     .getElementById('characterImages')
     .addEventListener('click', function(e) {
-      // e.target is the clicked element!
-      // If it was a list item
       document.querySelectorAll('.selectedCharacter').forEach(function(e) {
         e.setAttribute('style', 'background-color: none;');
       });
-      console.log(e.target.id + '  was clicked!');
       player.sprite = e.target.id;
-      // e.target.setAttribute("style", "background-color: red;");
-
       e.target.setAttribute('style', 'border-bottom: 3px solid red;');
     });
 }
+
+/*Once the document is loaded, a modal window pops up and chooseCharacter function is called 
+where user can select the character he wants to play with*/
+$(document).ready(function() {
+  $('#startGameModal').modal();
+  chooseCharacter();
+});

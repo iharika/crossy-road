@@ -12,7 +12,7 @@ var Enemy = function() {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-  // You should multiply any movement by the dt parameter
+  // multiplies the movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
   if (this.x < 494) {
@@ -31,23 +31,24 @@ Enemy.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-
 var Player = function() {
   this.sprite = 'images/char-pink-girl.png';
   this.x = 202;
   this.y = 385;
 };
-// This class requires an update(), render() and
-// a handleInput() method.
 
+//this function keeps checking if there are any collisions
+//between player and enemies by calling checkForCollisions function
 Player.prototype.update = function(dt) {
   checkForCollisions();
 };
 
+// Draw the player on the screen
 Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+//handles the input of user depending on the arrow keys pressed and moves the player accordingly
 Player.prototype.handleInput = function(keyPressed) {
   switch (keyPressed) {
     case 'up':
@@ -73,8 +74,7 @@ Player.prototype.handleInput = function(keyPressed) {
   }
 };
 
-// Now instantiate your objects.
-
+//Initializing all Enemy instances
 const allEnemies = [];
 const initiateEnemies = () => {
   for (i = 0; i < 5; i++) {
@@ -82,14 +82,13 @@ const initiateEnemies = () => {
   }
 };
 
-// Place all enemy objects in an array called allEnemies
+initiateEnemies();
 
-// Place the player object in a variable called player
-
+//creates new Player instance
 const player = new Player();
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// This listens for key presses and sends the keys to
+// Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
   var allowedKeys = {
     37: 'left',
@@ -97,10 +96,11 @@ document.addEventListener('keyup', function(e) {
     39: 'right',
     40: 'down'
   };
-
   player.handleInput(allowedKeys[e.keyCode]);
 });
 
+//This function checks for collisions by comparing the enemy and player's co-ordinates.
+//If any enemy collides with player, the player will be sent back to his initial position.
 function checkForCollisions() {
   allEnemies.forEach(function(enemy) {
     if (
@@ -113,5 +113,3 @@ function checkForCollisions() {
     }
   });
 }
-
-initiateEnemies();
